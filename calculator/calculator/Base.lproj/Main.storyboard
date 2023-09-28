@@ -47,11 +47,10 @@
                                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="q0N-lv-t3g">
                                                                 <rect key="frame" x="0.0" y="0.0" width="92.333333333333329" height="94"/>
                                                                 <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                <fontDescription key="fontDescription" name=".AppleSystemUIFont" family=".AppleSystemUIFont" pointSize="40"/>
                                                                 <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                                <state key="normal" title="Button"/>
-                                                                <buttonConfiguration key="configuration" style="plain" title="AC">
-                                                                    <fontDescription key="titleFontDescription" type="system" pointSize="40"/>
-                                                                </buttonConfiguration>
+                                                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                                                <state key="normal" title="AC"/>
                                                                 <userDefinedRuntimeAttributes>
                                                                     <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
                                                                         <integer key="value" value="48"/>
@@ -101,7 +100,7 @@
                                                                 <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                 <state key="normal" title="Button"/>
                                                                 <buttonConfiguration key="configuration" style="plain" title="÷">
-                                                                    <fontDescription key="titleFontDescription" type="system" pointSize="40"/>
+                                                                    <fontDescription key="titleFontDescription" type="system" pointSize="50"/>
                                                                 </buttonConfiguration>
                                                                 <userDefinedRuntimeAttributes>
                                                                     <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
@@ -424,9 +423,17 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="addButton" destination="quZ-Gb-9iA" id="dkF-X9-xxh"/>
                         <outlet property="button0" destination="jmk-tN-oyy" id="c8e-ZF-wuZ"/>
                         <outlet property="clearButtonOutlet" destination="q0N-lv-t3g" id="gKj-EM-pCl"/>
+                        <outlet property="divideButton" destination="pIU-kC-UMT" id="4aJ-7S-iX4"/>
                         <outlet property="mainLabel" destination="gm5-HN-pcq" id="xZM-lR-Hap"/>
+                        <outlet property="multiplyButton" destination="KEN-0x-nW4" id="1Va-kB-p4d"/>
+                        <outlet property="subtractButton" destination="uEG-hV-3hg" id="5eW-RP-71x"/>
+                        <outletCollection property="arrayOfButtonOperators" destination="pIU-kC-UMT" collectionClass="NSMutableArray" id="Pto-VZ-tgG"/>
+                        <outletCollection property="arrayOfButtonOperators" destination="KEN-0x-nW4" collectionClass="NSMutableArray" id="pRK-KR-CGS"/>
+                        <outletCollection property="arrayOfButtonOperators" destination="uEG-hV-3hg" collectionClass="NSMutableArray" id="yU5-Zg-UB6"/>
+                        <outletCollection property="arrayOfButtonOperators" destination="quZ-Gb-9iA" collectionClass="NSMutableArray" id="MEe-Vj-1Qn"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
