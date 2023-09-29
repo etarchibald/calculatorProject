@@ -35,8 +35,7 @@ class ViewController: UIViewController {
     var operation = 0;
     var isNumberNegative = false
     var AreWeClearingEverything = true
-    var OtherButtonHasBeenClicked = false
-    
+    var areWeCompounding = false
     
     func originalColorsOfOperators(button: UIButton) {
         button.backgroundColor = UIColor.systemOrange
@@ -67,12 +66,33 @@ class ViewController: UIViewController {
         areWeDoingSomething = false
         operation = 0
         isNumberNegative = false
+        areWeCompounding = false
     }
     
     func setOperatorsToOriginalColors(button: [UIButton]) {
         for each in button {
             originalColorsOfOperators(button: each)
         }
+    }
+    
+    func performCalculation(first: Double, second: Double) {
+        if operation == 12 { //Divide Two Numbers
+            mainLabel.text = String(first / second)
+            originalColorsOfOperators(button: divideButton)
+        }
+        if operation == 13 { //Multiply Two Numbers
+            mainLabel.text = String(first * second)
+            originalColorsOfOperators(button: multiplyButton)
+        }
+        if operation == 14 { //Subtract Two Numbers
+            mainLabel.text = String(first - second)
+            originalColorsOfOperators(button: subtractButton)
+        }
+        if operation == 15 { //Add Two Numbers
+            mainLabel.text = String(first + second)
+            originalColorsOfOperators(button: addButton)
+        }
+//        areWeDoingSomething = false
     }
     
     
@@ -84,6 +104,7 @@ class ViewController: UIViewController {
             //Each number has a tag of one greater than the number it displays
             areWeDoingSomething = false
             setAsclearButton(button: clearButtonOutlet)
+            areWeCompounding = true
         } else {
             mainLabel.text! += String(sender.tag-1)
         }
@@ -94,7 +115,6 @@ class ViewController: UIViewController {
         if AreWeClearingEverything == true {
             clearEveryThing()
             setOperatorsToOriginalColors(button: arrayOfButtonOperators)
-            
         } else if AreWeClearingEverything == false && mainLabel.text != "" {
             mainLabel.text = ""
             setAsAllClearButton(button: clearButtonOutlet)
@@ -130,7 +150,9 @@ class ViewController: UIViewController {
         
         if mainLabel.text != "" && sender.tag != 16 {
             
-            firstNumber = Double(mainLabel.text!)!
+            if areWeCompounding == false {
+                firstNumber = Double(mainLabel.text!)!
+            }
             
             func FindingOutifWeAreDoingSomething(button: UIButton) {
                 if areWeDoingSomething == true {
@@ -143,44 +165,25 @@ class ViewController: UIViewController {
                 }
             }
             
-            func AnotherButtonHasBeenPressed(button: UIButton) {
-                setOperatorsToOriginalColors(button: arrayOfButtonOperators)
-                areWeDoingSomething = false
-                FindingOutifWeAreDoingSomething(button: sender)
-                OtherButtonHasBeenClicked = false
+            if areWeCompounding == true {
+                areWeCompounding = false
+                secondNumber = Double(mainLabel.text!)!
+                performCalculation(first: firstNumber, second: secondNumber)
+                firstNumber = Double(mainLabel.text!)!
             }
             
+            
             if sender.tag == 12 { //Divide
-                if OtherButtonHasBeenClicked == false {
-                    FindingOutifWeAreDoingSomething(button: sender)
-                    OtherButtonHasBeenClicked = true
-                } else {
-                    AnotherButtonHasBeenPressed(button: sender)
-                }
+                FindingOutifWeAreDoingSomething(button: sender)
             }
             if sender.tag == 13 { //Multiply
-                if OtherButtonHasBeenClicked == false {
-                    FindingOutifWeAreDoingSomething(button: sender)
-                    OtherButtonHasBeenClicked = true
-                } else {
-                    AnotherButtonHasBeenPressed(button: sender)
-                }
+                FindingOutifWeAreDoingSomething(button: sender)
             }
             if sender.tag == 14 { //Subtract
-                if OtherButtonHasBeenClicked == false {
-                    FindingOutifWeAreDoingSomething(button: sender)
-                    OtherButtonHasBeenClicked = true
-                } else {
-                    AnotherButtonHasBeenPressed(button: sender)
-                }
+                FindingOutifWeAreDoingSomething(button: sender)
             }
             if sender.tag == 15 { //Add
-                if OtherButtonHasBeenClicked == false {
-                    FindingOutifWeAreDoingSomething(button: sender)
-                    OtherButtonHasBeenClicked = true
-                } else {
-                    AnotherButtonHasBeenPressed(button: sender)
-                }
+                FindingOutifWeAreDoingSomething(button: sender)
             }
             if sender.tag == 17 { //PercentageButton
                 mainLabel.text = String(firstNumber / 100)
@@ -188,29 +191,16 @@ class ViewController: UIViewController {
             }
             
             operation = sender.tag
+            
         }
         
         if sender.tag == 16 { //Equals Button
-            
             secondNumber = Double(mainLabel.text!)!
-            
-            if operation == 12 { //Divide Two Numbers
-                mainLabel.text = String(firstNumber / secondNumber)
-                originalColorsOfOperators(button: divideButton)
-            }
-            if operation == 13 { //Multiply Two Numbers
-                mainLabel.text = String(firstNumber * secondNumber)
-                originalColorsOfOperators(button: multiplyButton)
-            }
-            if operation == 14 { //Subtract Two Numbers
-                mainLabel.text = String(firstNumber - secondNumber)
-                originalColorsOfOperators(button: subtractButton)
-            }
-            if operation == 15 { //Add Two Numbers
-                mainLabel.text = String(firstNumber + secondNumber)
-                originalColorsOfOperators(button: addButton)
-            }
+            performCalculation(first: firstNumber, second: secondNumber)
             setAsAllClearButton(button: clearButtonOutlet)
+            areWeCompounding = false
+            areWeDoingSomething = false
+            setOperatorsToOriginalColors(button: arrayOfButtonOperators)
         }
         
     }
